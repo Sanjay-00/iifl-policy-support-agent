@@ -1,0 +1,10 @@
+.env
+.cache/
+logs/
+__pycache__/
+.pytest_cache/
+iifl/
+venv/
+.venv/
+*.pdf
+*.stackdump
