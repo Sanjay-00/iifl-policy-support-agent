@@ -65,7 +65,7 @@ Iteration during evaluation:
   - Over-long input was truncated before redaction, so a PAN straddling the cut could leave a fragment in the audit log.
   - Both are fixed, each with a test.
 
-The 46 offline tests use a fake LLM. They cover the loader and version filter, retrieval fallback, each grounding rule, the decision table, redaction in both directions, input validation, LLM exceptions, malformed JSON, grounding retry, injection escaping and the Streamlit app.
+The 47 offline tests use a fake LLM. They cover the loader and version filter, retrieval fallback, each grounding rule, the decision table, redaction in both directions, input validation, LLM exceptions, malformed JSON, grounding retry, injection escaping and the Streamlit app.
 
 ## Limitations
 

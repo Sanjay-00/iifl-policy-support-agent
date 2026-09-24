@@ -3,6 +3,7 @@ import json
 import streamlit as st
 from streamlit.testing.v1 import AppTest
 
+from src.config import ROOT
 from src.pipeline import SupportAgent
 from tests.conftest import FakeLLM
 from tests.test_pipeline import GOOD, QUESTION
@@ -31,3 +32,13 @@ def test_app_displays_exactly_what_the_pipeline_returns(tmp_path, monkeypatch):
     records = [json.loads(line) for line in log.read_text(encoding="utf-8").splitlines()]
     assert len(records) == 2
     assert {k: records[1][k] for k in expected if k != "debug"} == {k: v for k, v in expected.items() if k != "debug"}
+    # The structured block is exactly the six-field result, without debug data.
+    assert json.loads(at.json[0].value) == {k: v for k, v in expected.items() if k != "debug"}
+
+
+def test_sample_picker_fills_the_question_box():
+    samples = json.loads((ROOT / "data" / "sample_questions.json").read_text(encoding="utf-8"))
+    at = AppTest.from_file("../app.py", default_timeout=30).run()
+    at.selectbox[0].select(samples[1]).run()
+    assert not at.exception
+    assert at.text_area[0].value == samples[1]

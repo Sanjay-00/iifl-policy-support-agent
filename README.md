@@ -17,13 +17,13 @@ cp .env.example .env              # Windows: copy .env.example .env, then add yo
 python -m src.cli "What are the foreclosure charges on a fixed-rate personal loan?"
 python -m src.cli --batch data/sample_questions.json               # the 5 sample questions
 python -m src.cli --debug "What is my exact foreclosure amount?"   # adds retrieval/grounding details
-python -m pytest                                                   # 46 offline tests, no key needed
+python -m pytest                                                   # 47 offline tests, no key needed
 python -m src.evaluate                                             # 32-case end-to-end evaluation (live)
 python -m src.evaluate --retrieval-only [--retriever bm25]         # retrieval benchmark
 streamlit run app.py                                               # optional demo UI
 ```
 
-The CLI is the primary interface. `app.py` is a thin presentation layer: it calls the same `SupportAgent.answer()` and adds no logic of its own. `tests/test_app.py` checks that the app shows exactly what the pipeline returns.
+The CLI is the primary interface. `app.py` is a thin presentation layer: it calls the same `SupportAgent.answer()` and adds no logic of its own. It offers the sample questions from `data/sample_questions.json`, and shows the six-field structured result alongside the answer. `tests/test_app.py` checks that the app shows exactly what the pipeline returns.
 
 ## Example
 
@@ -98,7 +98,7 @@ All evaluation data is synthetic and small, so these numbers show how the system
   - Result: tuning 22/22, held-out 10/10.
   - A pass checks the action, the category and banned strings. It does not check whether the answer is correct.
   - An earlier prompt scored 17/22 until the coverage definition was fixed.
-- **Offline tests:** 46 tests use a fake LLM. They cover each grounding rule, the decision table, redaction, the failure paths, prompt-injection escaping and the Streamlit app.
+- **Offline tests:** 47 tests use a fake LLM. They cover each grounding rule, the decision table, redaction, the failure paths, prompt-injection escaping and the Streamlit app.
 - **Main limitations:**
   - The figure check doesn't see context.
   - Claims without figures aren't checked.
