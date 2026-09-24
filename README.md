@@ -2,6 +2,8 @@
 
 Answers a customer question from policy documents, returns the six-field result the assignment asks for, and escalates when the documents don't support a safe answer. Built for the IIFL AI Engineer Round 1 assignment.
 
+**Live demo:** https://iifl-policy-support-agent.streamlit.app/ (the Streamlit UI, running on the synthetic policies below)
+
 > **The three policy documents in `data/policies/` are synthetic.** No documents were available with the assignment, so they were written for this exercise. They are not IIFL policies. Real documents in the same format can be dropped in without code changes, but the similarity thresholds were calibrated on these synthetic documents and would need re-checking.
 
 ## Setup
